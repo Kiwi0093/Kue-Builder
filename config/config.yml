@@ -1,0 +1,5 @@
+config:
+  organization: "your-github-id" # 提醒 Fork 者修改
+  registry: "ghcr.io"
+  defaults:
+    arch: "amd64"
