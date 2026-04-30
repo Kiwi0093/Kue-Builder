@@ -24,9 +24,9 @@ pipeline_tasks: [
 			// 注入全域預設架構
 			hw: arch: *config.defaults.arch | _
 			
-			// --- 關鍵注入：如果是 lsio，就把 organization 塞進去 ---
+			// --- 關鍵修正：如果是 lsio，就把 config 裡的組織名稱傳進去 ---
 			if spec.kind == "lsio" {
-				_base_pattern: "ghcr.io/\(config.organization)/lsio-base-hardened:latest"
+				_org: config.organization
 			}
 			
 			_gen: #TagGenerator & {_spec: spec}
