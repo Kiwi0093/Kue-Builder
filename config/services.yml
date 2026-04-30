@@ -1,0 +1,7 @@
+services:
+  example-app:
+    kind: "lsio"
+    hw:
+      microarch: "v3"
+    ver:
+      upstream: "1.0.0"
