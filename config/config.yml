@@ -1,5 +1,11 @@
 config:
-  organization: "your-github-id" # 提醒 Fork 者修改
-  registry: "ghcr.io"
-  defaults:
-    arch: "amd64"
+  project_name: "kue-builder"
+  organization: "kiwi-io" # 這就是你的 Registry 帳號
+  registry: "ghcr.io"     # Registry 地址
+  
+  # [新增] 這裡定義 Registry 的細節，方便 Dagger 內部邏輯呼叫
+  registry_details:
+    # 這裡引用 organization，保持資料一致性
+    username: "kiwi-io" 
+    # 這裡標註 Secret 的名稱，Dagger 會去環境變數抓
+    password_env: "REGISTRY_TOKEN"
