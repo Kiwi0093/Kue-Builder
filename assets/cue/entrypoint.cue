@@ -9,6 +9,7 @@ import (
 config:   core.#GlobalConfig
 services: [Name=string]: #ServiceTask
 
+// 這裡會根據 kind 自動選擇要不要抽換底層
 #ServiceTask: vendors.#LSIO_OptimizedForge | core.#DaggerBase
 
 #TagGenerator: {
@@ -22,6 +23,7 @@ pipeline_tasks: [
 		spec & {
 			"name": name
 			hw: arch: *config.defaults.arch | _
+			
 			_gen: #TagGenerator & {_spec: spec}
 			computed_tag: _gen.out
 			full_image:   "\(config.registry)/\(config.organization)/\(name):\(computed_tag)"
