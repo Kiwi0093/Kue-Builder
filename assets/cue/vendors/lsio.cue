@@ -1,14 +1,18 @@
 package vendors
 
-import "../core"
+import (
+	"../core"
+	"../capabilities"
+)
 
-#LSIO_OptimizedForge: core.#DaggerBase & {
+// 這裡就是你說的：寫死在 CUE 內，不可自訂的魔改底層
+_lsio_refactored_base: "ghcr.io/\(core.#GlobalConfig.organization)/lsio-base-hardened:latest"
+
+#LSIO_OptimizedForge: capabilities.#HardwareForge & {
 	kind: "lsio"
 	
-	// 動態指向該組織下的魔改底層
-	// 例如：ghcr.io/user-a/lsio-base-hardened:latest
-	// 這樣 Fork 的人只需要在自己的倉庫也建一個同名的 base 即可
-	base_image: "ghcr.io/\(core.#GlobalConfig.organization)/lsio-base-hardened:latest"
+	// 強制抽換底層：不管用戶在 YAML 寫什麼，這裡都會鎖定你的魔改版
+	base_image: _lsio_refactored_base
 	
 	_internal_excludes: ["**/*.pdb", "/var/log/s6/*"]
 }
