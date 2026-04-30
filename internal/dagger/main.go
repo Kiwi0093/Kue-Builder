@@ -12,11 +12,13 @@ import (
 
 // 定義與 CUE 輸出的 JSON 相對應的結構
 type Task struct {
-    Name      string   `json:"name"`
-    BaseImage string   `json:"base_image"`
-    FullImage string   `json:"full_image"`
-    Excludes  []string `json:"excludes"` // 確保這裡是小寫
-    // ...
+	Name      string            `json:"name"`
+	Source    string            `json:"source"`     // 補上這個，Dagger 才知道去哪抓 Code
+	BaseImage string            `json:"base_image"`
+	FullImage string            `json:"full_image"`
+	Env       map[string]string `json:"env"`
+	BuildCmd  []string          `json:"build_cmd"`  // 補上這個，Dagger 才知道怎麼編譯
+	Excludes  []string          `json:"excludes"`
 }
 
 func main() {
