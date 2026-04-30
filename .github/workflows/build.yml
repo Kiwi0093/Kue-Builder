@@ -1,0 +1,36 @@
+name: Build and Push
+on:
+# 正式要跑的時候要把下面兩行的註解拿掉
+#  push:
+#    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write # 必須開啟此權限才能推送到 GHCR
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install CUE
+        uses: cue-lang/setup-cue@v1
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate Pipeline JSON
+        run: cue export ./assets/cue/entrypoint.cue ./config/*.yml -e pipeline_tasks --out json > pipeline.json
+
+      - name: Run Dagger
+        uses: dagger/dagger-for-github-action@v5
+        with:
+          verb: run
+          # 這裡假設你已經把 Dagger 邏輯寫在 internal/dagger/main.go
+          args: go run ./internal/dagger/main.go --config pipeline.json
