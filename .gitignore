@@ -1,0 +1,27 @@
+# --- Kue-Builder Specific ---
+# 忽略 CUE 產出的中間 JSON 計畫
+pipeline.json
+
+# --- Go / Dagger ---
+# 忽略 Go 編譯出的執行檔
+bin/
+internal/dagger/dagger-build
+# 忽略 Dagger 的快取與日誌
+.dagger/
+*.log
+
+# --- CUE ---
+# 如果未來有下載外部 CUE 模組，忽略它們
+cue.mod/pkg/
+cue.mod/gen/
+
+# --- OS / IDE ---
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# --- Secrets ---
+# 雖然我們用 GitHub Secrets，但預防萬一，忽略所有 .env 檔案
+.env
+*.secret
