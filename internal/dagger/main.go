@@ -12,12 +12,11 @@ import (
 
 // 定義與 CUE 輸出的 JSON 相對應的結構
 type Task struct {
-	Name         string            `json:"name"`
-	BaseImage    string            `json:"base_image"`
-	FullImage    string            `json:"full_image"`
-	Env          map[string]string `json:"env"`
-	Excludes     []string          `json:"excludes"`
-	// 未來可擴充 BuildCmd 等欄位
+    Name      string   `json:"name"`
+    BaseImage string   `json:"base_image"`
+    FullImage string   `json:"full_image"`
+    Excludes  []string `json:"excludes"` // 確保這裡是小寫
+    // ...
 }
 
 func main() {
