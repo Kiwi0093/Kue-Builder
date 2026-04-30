@@ -3,7 +3,7 @@ services:
     kind: "lsio"
     # [新增] 告訴 Dagger 去哪裡抓原始碼
     # 支援 Git 倉庫 (可帶 branch 或 tag)
-    source: "https://github.com/nginx/nginx.git#tags/release-1.25.3"
+    source: "https://github.com/nginx/nginx.git"
     
     hw:
       microarch: "v3"
