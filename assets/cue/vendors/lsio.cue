@@ -1,18 +1,16 @@
 package vendors
 
 import (
-	"../core"
 	"../capabilities"
 )
 
-// 這裡就是你說的：寫死在 CUE 內，不可自訂的魔改底層
-_lsio_refactored_base: "ghcr.io/\(core.#GlobalConfig.organization)/lsio-base-hardened:latest"
-
+// 這裡定義一個「佔位符」，具體路徑由 entrypoint.cue 注入
 #LSIO_OptimizedForge: capabilities.#HardwareForge & {
 	kind: "lsio"
 	
-	// 強制抽換底層：不管用戶在 YAML 寫什麼，這裡都會鎖定你的魔改版
-	base_image: _lsio_refactored_base
+	// 這裡先定義結構，不寫死 organization，交給 entrypoint 處理
+	_base_pattern: string 
+	base_image:    _base_pattern
 	
 	_internal_excludes: ["**/*.pdb", "/var/log/s6/*"]
 }
