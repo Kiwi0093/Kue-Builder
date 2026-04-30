@@ -18,7 +18,12 @@ package core
 	
 	// 編譯指令：Dagger 會在 Builder 容器內執行這些
 	build_cmd: [...string] | *[] 
-	
+
+    // [新增] 原始碼來源
+	// 可以是 Git URL (https://github.com/...) 
+	// 或是本地路徑 ("./src/my-app")
+	source: string | *"." 
+
 	// 排除清單
 	_internal_excludes: [...string] | *[]
 	user_excludes:      [...string] | *[]
