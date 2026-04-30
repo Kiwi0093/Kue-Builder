@@ -1,7 +1,15 @@
 services:
-  example-app:
+  nginx-optimized:
     kind: "lsio"
+    # [新增] 告訴 Dagger 去哪裡抓原始碼
+    # 支援 Git 倉庫 (可帶 branch 或 tag)
+    source: "https://github.com/nginx/nginx.git#tags/release-1.25.3"
+    
     hw:
       microarch: "v3"
     ver:
-      upstream: "1.0.0"
+      upstream: "1.25.3"
+      lsio_build: 1
+    build_cmd:
+      - "./configure --prefix=/usr/local/nginx"
+      - "make"
