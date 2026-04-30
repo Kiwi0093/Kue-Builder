@@ -1,4 +1,4 @@
-module github.com/kiwi-io/kue-builder
+module github.com/Kiwi0093/Kue-Builder
 
 go 1.21
 
